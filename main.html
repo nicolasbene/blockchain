@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Blockchain</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script type="text/javascript" src="/usr/local/lib/bower_components/crypto-js/crypto-js.js"></script>
+        
+
+    <head>
+    <body>
+        <div id="panel-control">
+            <button id="btn-gen">Démarrer la génération automatique</button>
+            <button id="btn-next">Générer le block suivant</button>
+        </div>
+        <div id="blockchain">
+        </div>
+        <div id="block-info">
+            <h1>
+            Bloc <span id="block-hash">10</span>
+            </h1>
+            <table>
+            <tr>
+                <td>Précédent bloc</td>
+                <td id="prev-hash-info"></td>
+            </tr>
+            <tr>
+                <td>Date</td>
+                <td id="date-info"></td>
+            </tr>
+            <tr>
+                <td>Transactions</td>
+                <td id="tx-info"></td>
+            </tr>
+            </table>
+        </div>
+    </body>
+
+    <script language="JavaScript" type="text/javascript" src="script.js"></script>
+</html>
