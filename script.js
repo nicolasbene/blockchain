@@ -7,19 +7,22 @@ function toHex(val)
 class Block 
 {
 	constructor(txs, nonce, prevBlock) 
-    {
-        this.txs = txs;
-        this.nonce = nonce;
-        this.prevBlockHash = prevBlock;
-            this.timestamp = Date.now();
-}
+  {
+      this.txs = txs;
+      this.nonce = nonce;
+      this.prevBlockHash = prevBlock;
+      this.timestamp = Date.now();
+  }
   
-  getMerkle() {
+  getMerkle()
+  {
   	return CryptoJS.SHA256(this.txs.toString()).toString();
   }
   
-  getHash() {
-  	return CryptoJS.SHA256(
+  getHash()
+  {
+  	return CryptoJS.SHA256
+    (
     	'01000000'
     	+ this.prevBlockHash
       + this.getMerkle()
@@ -29,24 +32,28 @@ class Block
     ).toString();
   }
   
-  renderInfo() {
-	document.querySelector('#block-hash').innerHTML = this.getHash();
+  renderInfo()
+  {
+	  document.querySelector('#block-hash').innerHTML = this.getHash();
     document.querySelector('#prev-hash-info').innerHTML = this.prevBlockHash;
     document.querySelector('#date-info').innerHTML = this.timestamp;
     document.querySelector('#tx-info').innerHTML = this.txs.toString().replace(/,/g, '<br/>');
   }
 }
 
-class Blockchain {
+class Blockchain
+{
 
-	constructor(genesisBlock) {
+  constructor(genesisBlock)
+  {
 		this.blocks = new Array();
     this.blocks[genesisBlock.getHash()] = genesisBlock;
     
     this.render(genesisBlock);
   }
   
-  mineNewBlock(txs) {
+  mineNewBlock(txs)
+  {
   	// Nonce = preuve de travail
 		let nonce = Math.floor(Math.random() * 4294967294) + 1;
     let minedBlock = new Block(txs, nonce, this.getLastBlock().getHash());
@@ -55,7 +62,8 @@ class Blockchain {
     this.render(minedBlock);
   }
   
-  render(newBlock) {
+  render(newBlock)
+  {
     let node = document.querySelector('#blockchain');
     
     let blocNode = document.createElement('div');
@@ -63,13 +71,15 @@ class Blockchain {
     
 		blocNode.classList.add('block');
     blocNode.setAttribute('onClick', 'blockchain.getLastBlock(this)');
-    blocNode.onclick = (function(node) {
-    	this.selectBlock(newBlock.getHash(), node.srcElement);
+    blocNode.onclick = (function(node)
+    {
+      this.selectBlock(newBlock.getHash(), node.srcElement);
     }).bind(this);
     
     node.appendChild(blocNode);
     
-    if (!newBlock.prevBlockHash) {
+    if (!newBlock.prevBlockHash)
+    {
     	newBlock.renderInfo();
       blocNode.classList.add('selected');
       return;
@@ -78,19 +88,22 @@ class Blockchain {
 		lastNode.classList.add('with-next-block');		
   }
   
-  selectBlock(blockHash, node) {
+  selectBlock(blockHash, node)
+  {
   	let selectedNode = document.querySelector('.selected');
     selectedNode.classList.remove('selected');
     node.classList.add('selected');
     this.blocks[blockHash].renderInfo();
   }
   
-  getLastBlock() {
+  getLastBlock()
+  {
   	let key = Object.keys(this.blocks)[Object.keys(this.blocks).length - 1];
   	return this.blocks[key];
   }
   
-	prevBlockFrom(currentBlock) {
+	prevBlockFrom(currentBlock)
+  {
   	return this.blocks[currentBlock.prevBlockHash];
   }
 }
@@ -101,29 +114,37 @@ let blockchain = new Blockchain(genesisBlock);
 
 let generator;
 
-function genTxs() {
+function genTxs()
+{
   let nbTx = Math.floor(Math.random() * 10);
   let txs = new Array(nbTx);
-  for (let i = 0; i < nbTx; i++) {
+  for (let i = 0; i < nbTx; i++)
+  {
   	let n = Math.floor((Math.random() * 1000000000) + 1);
     txs[i] = CryptoJS.SHA256(n + '').toString();
   }
   return txs;
 }
 
-document.querySelector('#btn-gen').onclick = function() {
-	if (!generator) {
+document.querySelector('#btn-gen').onclick = function()
+{
+	if (!generator)
+  {
   	this.innerHTML = 'Arrêter la génération automatique';
-    generator = setInterval(() => {
+    generator = setInterval(() => 
+    {
       blockchain.mineNewBlock(genTxs());
     }, 2500);  
-  } else {
+  }
+  else
+  {
   	this.innerHTML = 'Démarrer la génération automatique';
  		clearInterval(generator); 
     generator = null;
   }
 }
 
-document.querySelector('#btn-next').onclick = function() {
+document.querySelector('#btn-next').onclick = function()
+{
 	blockchain.mineNewBlock(genTxs());
 }

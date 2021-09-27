@@ -1,7 +1,9 @@
 * {
     font-family: Arial, Helvetica, sans-serif; 
   }
-  button {
+
+  button
+  {
     width: 100%;
     height: 33px;
     border-radius: 3px;
@@ -11,54 +13,78 @@
     outline: none;
     margin-bottom: 8px;
   }
-  td {
+
+  td
+  {
     word-break: break-all;
     min-width: 125px;
   }
-  button:hover {
+
+  button:hover
+  {
     background-color: #A4B7FC;
     cursor: pointer;
   }
-  #panel-control {
+
+  #panel-control
+  {
     width: 100%;
     margin-bottom: 33px;
   }
-  #blockchain {
+
+  #blockchain
+  {
     width: 70px;
   }
-  #block-info {
+
+  #block-info
+  {
     position: fixed;
     max-width: 500px;
   }
-  #block-info h1 {
+
+  #block-info h1
+  {
     margin: 0;
     margin-bottom: 5px;
     color: #4168FC;
     font-size: 1em;
     word-break: break-all;
   }
-  #blockchain, #block-info {
+
+  #blockchain, #block-info
+  {
     display: inline-block;
     vertical-align: top;
   }
-  .block {
+
+  .block
+  {
     position: relative;
     transition: all 0.23s ease-out;
     width: 55px;
     height: 55px;
     border: 2px solid #4168FC;
   }
-  .block:hover {
+
+  .block:hover
+  {
     cursor: pointer;
     background-color: #A4B7FC;
   }
-  .block.selected {
+
+  .block.selected
+  {
     background-color: #4168FC;
   }
-  .block.with-next-block {
+
+  .block.with-next-block
+  {
     margin-bottom: 25px;
   }
-  .block.with-next-block::before {
+
+  .block.with-next-block::before
+  {
     content: "";
     position: absolute;
     bottom: -26px;
@@ -67,12 +93,18 @@
     height: 22px;
     background-color: #4168FC
   }
-  table {
+
+  table
+  {
     border-collapse: collapse;
   }
-  table tr td {
+
+  table tr td
+  {
     padding: 6px 12px;
   }
-  table td:nth-child(2) {
+
+  table td:nth-child(2)
+  {
     border-left: 3px solid #A4B7FC;
   }
