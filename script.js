@@ -8,22 +8,23 @@ class Block
 {
 	constructor(txs, nonce, prevBlock) 
   {
-      this.txs = txs;
-      this.nonce = nonce;
-      this.prevBlockHash = prevBlock;
+      this.txs = txs; // txs = transaction
+      this.nonce = nonce; // nonce = preuve de travail
+      this.prevBlockHash = prevBlock; // hash du block précédent
       this.timestamp = Date.now();
   }
   
+  // Merkel tri = identification des blocks
   getMerkle()
   {
   	return CryptoJS.SHA256(this.txs.toString()).toString();
   }
-  
+
   getHash()
   {
   	return CryptoJS.SHA256
     (
-    	'01000000'
+    	'01000000' // la version
     	+ this.prevBlockHash
       + this.getMerkle()
       + toHex(this.timestamp)
@@ -44,7 +45,7 @@ class Block
 class Blockchain
 {
 
-  constructor(genesisBlock)
+  constructor(genesisBlock) // GenesisBlock = le premier block
   {
 		this.blocks = new Array();
     this.blocks[genesisBlock.getHash()] = genesisBlock;
